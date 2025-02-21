@@ -2,6 +2,9 @@ import streamlit as st
 import json
 from datetime import datetime
 
+# Configuração da página
+st.set_page_config(page_title="Top Songs Filter")
+
 # Carrega os dados do arquivo JSON
 with open("songs.json", "r", encoding="utf-8") as file:
     songs = json.load(file)
@@ -31,7 +34,22 @@ def filter_songs(year=None, month=None, day=None):
     return filtered
 
 # Interface do Streamlit
-st.title("🎵 Filtrador de Músicas do Spotify por Data 🎵")
+st.markdown(
+    """
+    <div style="display:flex; align-items:center; justify-content:center; gap:10px; font-family: 'Circular', sans-serif; font-size: 32px; font-weight: bold; margin-bottom: 20px;">
+        <a href="https://www.spotify.com" target="_blank">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="40" height="40" style="transition: transform 0.3s ease-in-out;">
+        </a>
+        <span>Top Songs Filter - Spotify</span>
+    </div>
+    <style>
+        a:hover img {
+            transform: scale(1.1);
+        }
+    </style>
+    """,
+    unsafe_allow_html=True
+)
 
 # Criar seletores de ano, mês e dia
 years = sorted(set(parse_date(song["release_date"]) for song in songs if parse_date(song["release_date"]) is not None))
@@ -46,7 +64,7 @@ day = st.selectbox("Selecione o Dia", [None] + days)
 filtered_songs = filter_songs(year, month, day)
 
 # Mostrar resultados
-st.subheader(f"🎶 {len(filtered_songs)} músicas encontradas:")
+st.subheader(f"🎶 {len(filtered_songs)} música(s) encontrada(s):")
 for song in filtered_songs:
     col1, col2 = st.columns([1, 4])
     with col1:
@@ -54,4 +72,27 @@ for song in filtered_songs:
             st.image(song["album_cover"], width=80)
     with col2:
         st.write(f"**{song['name']}** - {song['artist']} ({song['release_date']})")
-        st.markdown(f"[Ouvir no Spotify]({song['spotify_url']})")
+        st.markdown(
+            f'<a href="{song["spotify_url"]}" target="_blank" style="color:#1DB954; font-weight:bold; text-decoration:none; display:flex; align-items:center; gap:8px;">'
+            f'<img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="20" height="20" style="vertical-align:middle; transition: transform 0.2s ease-in-out;">'
+            f' <span style="transition: color 0.2s ease-in-out;">Ouvir no Spotify</span></a>'
+            f'<style>a:hover img {{ transform: scale(1.1); }} a:hover span {{ color: #17a34a; }}</style>',
+            unsafe_allow_html=True
+        )
+
+# Rodapé
+st.markdown(
+    """
+    <div style="text-align:center; margin-top:40px; font-size:14px; color:white; padding:15px; border-radius:5px;">
+        <strong>Top Songs Filter - Spotify</strong>
+        <br><br>
+        <strong>Samuel Lisboa, 2025</strong>
+        <br>
+        <a href="https://github.com/SamuelLisboaCodes" target="_blank" style="text-decoration:none; color:inherit; display:flex; align-items:center; justify-content:center; gap:8px; margin-top:10px;">
+            <img src="https://cdn-icons-png.flaticon.com/512/25/25231.png" width="20" height="20" style="vertical-align:middle; filter: invert(1);">
+            <span>SamuelLisboaCodes</span>
+        </a>
+    </div>
+    """,
+    unsafe_allow_html=True
+)
