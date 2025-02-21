@@ -36,11 +36,14 @@ def filter_songs(year=None, month=None, day=None):
 # Interface do Streamlit
 st.markdown(
     """
-    <div style="display:flex; align-items:center; justify-content:center; gap:10px; font-family: 'Circular', sans-serif; font-size: 32px; font-weight: bold; margin-bottom: 20px;">
+    <div style="display:flex; align-items:center; justify-content:center; gap:10px; font-family: 'Circular', sans-serif; font-size: 32px; font-weight: bold; margin-bottom: 10px;">
         <a href="https://www.spotify.com" target="_blank">
             <img src="https://upload.wikimedia.org/wikipedia/commons/8/84/Spotify_icon.svg" width="40" height="40" style="transition: transform 0.3s ease-in-out;">
         </a>
         <span>Top Songs Filter - Spotify</span>
+    </div>
+    <div style="text-align:center; font-size: 20px; color: #f0f0f0; margin-bottom: 20px; font-weight: 500;">
+        Encontre suas músicas favoritas com precisão! Use o filtro para explorar hits por ano, mês e dia e reviva momentos inesquecíveis através da música!
     </div>
     <style>
         a:hover img {
