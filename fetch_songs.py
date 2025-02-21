@@ -15,7 +15,7 @@ sp = spotipy.Spotify(auth_manager=SpotifyOAuth(
     scope="playlist-read-private"
 ))
 
-# Lista das playlists que você me enviou
+# Lista das playlists 
 playlist_ids = [
     "7q6DU8dGQx2PNuO9kt7CBl",
     "6Sa8OHGCRwzXFDpPIV7alz",
