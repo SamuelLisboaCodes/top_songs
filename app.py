@@ -59,9 +59,9 @@ years = sorted(set(parse_date(song["release_date"]) for song in songs if parse_d
 months = list(range(1, 13))
 days = list(range(1, 32))
 
-year = st.selectbox("Selecione o Ano", [None] + years)
-month = st.selectbox("Selecione o Mês", [None] + months)
-day = st.selectbox("Selecione o Dia", [None] + days)
+year = st.selectbox("Selecione o Ano:", [None] + years)
+month = st.selectbox("Selecione o Mês:", [None] + months)
+day = st.selectbox("Selecione o Dia:", [None] + days)
 
 # Filtrar músicas com base na seleção
 filtered_songs = filter_songs(year, month, day)
