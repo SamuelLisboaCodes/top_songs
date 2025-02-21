@@ -48,5 +48,10 @@ filtered_songs = filter_songs(year, month, day)
 # Mostrar resultados
 st.subheader(f"🎶 {len(filtered_songs)} músicas encontradas:")
 for song in filtered_songs:
-    st.write(f"**{song['name']}** - {song['artist']} ({song['release_date']})")
-    st.markdown(f"[Ouvir no Spotify]({song['spotify_url']})")
+    col1, col2 = st.columns([1, 4])
+    with col1:
+        if song.get("album_cover"):
+            st.image(song["album_cover"], width=80)
+    with col2:
+        st.write(f"**{song['name']}** - {song['artist']} ({song['release_date']})")
+        st.markdown(f"[Ouvir no Spotify]({song['spotify_url']})")

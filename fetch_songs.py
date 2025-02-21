@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import os
 import spotipy
 from spotipy.oauth2 import SpotifyOAuth
@@ -37,7 +39,8 @@ for playlist_id in playlist_ids:
                 "artist": track["artists"][0]["name"],
                 "album": track["album"]["name"],
                 "release_date": track["album"]["release_date"],
-                "spotify_url": track["external_urls"]["spotify"]
+                "spotify_url": track["external_urls"]["spotify"],
+                "album_cover": track["album"]["images"][0]["url"] if track["album"]["images"] else None  # Adiciona a capa do álbum
             }
             songs_data.append(song_info)
 
@@ -45,4 +48,4 @@ for playlist_id in playlist_ids:
 with open("songs.json", "w", encoding="utf-8") as json_file:
     json.dump(songs_data, json_file, ensure_ascii=False, indent=4)
 
-print("Arquivo 'songs.json' criado com sucesso!")
+print("Arquivo 'songs.json' atualizado com sucesso!")
